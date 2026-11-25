@@ -2,9 +2,14 @@
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#15594d"><title>Ôn tập CNXHKH · 100 câu</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f4f6f3;color:#23362f;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}header{background:#123f36;color:white;padding:28px max(20px,calc((100vw - 1120px)/2));}header small{color:#cce5d9;letter-spacing:.13em;font-size:12px}h1{font-size:clamp(25px,4vw,36px);margin:4px 0}header p{margin:0;color:#deeee6;font-size:15px}.layout{max-width:1160px;padding:28px 20px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:24px}.card{background:white;border:1px solid #dce5dc;border-radius:18px;padding:28px;box-shadow:0 5px 25px #183b2406}.topline{display:flex;justify-content:space-between;gap:10px;font-size:14px;color:#58685e}progress{width:100%;height:9px;accent-color:#23806a;margin:14px 0 25px}#question-number{font-weight:750;color:#21705a}#question{font-size:21px;line-height:1.6;margin:14px 0 24px;font-weight:650;outline:none}.option{display:flex;gap:15px;align-items:flex-start;text-align:left;width:100%;padding:15px 18px;background:white;border:1px solid #d5dfd6;margin:12px 0;border-radius:12px;font:inherit;color:inherit;cursor:pointer}.option:not(:disabled):hover{border-color:#2f8970;background:#f4faf6}.letter{flex:0 0 30px;height:30px;display:grid;place-items:center;border-radius:8px;background:#edf2eb;font-weight:700}.option:disabled{cursor:default;opacity:1}.option.correct{background:#e8f7ed;border-color:#36835b;color:#195e36}.option.incorrect{background:#fff0ee;border-color:#c96353;color:#962f26}.feedback{padding:17px 20px;border-radius:12px;margin-top:20px}.feedback p{margin:6px 0 0}.good{background:#e8f7ed;color:#195e36}.bad{background:#fff0ee;color:#962f26}.actions{display:flex;justify-content:space-between;gap:12px;margin-top:24px}button{font:inherit;cursor:pointer;border:1px solid #cad9ce;padding:10px 17px;border-radius:10px;background:white;color:#23362f}button:disabled{opacity:.45;cursor:default}.primary{background:#15614f;color:white;border-color:#15614f}button:focus-visible{outline:3px solid #dc9b33;outline-offset:3px}aside .card{padding:20px}.stats{display:flex;gap:12px;margin:16px 0}.stats div{flex:1;background:#f1f6ef;padding:12px;border-radius:10px;font-size:13px}.stats strong{display:block;font-size:26px;color:#206c4d}.stats div:last-child strong{color:#af493a}#nav{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.nav-item{padding:6px 0;font-size:13px;border-radius:7px}.nav-item.active{outline:2px solid #1c6656;outline-offset:1px}.done-good{background:#dff1e4;color:#1b633b}.done-bad{background:#ffe7e0;color:#a1392c}details summary{cursor:pointer;font-weight:600;margin-bottom:16px}.note{font-size:13px;color:#6c766c;margin-top:20px}#restart{width:100%;font-size:14px;margin-top:18px}#summary{margin-bottom:22px;border-color:#89b29a;background:#f0faf2}#summary h2{margin:0;font-size:22px}[hidden]{display:none!important}footer{max-width:1120px;margin:0 auto 30px;padding:0 20px;color:#6c766c;font-size:13px}@media(max-width:800px){.layout{grid-template-columns:1fr;padding:18px 12px}.card{padding:20px}#nav{grid-template-columns:repeat(10,1fr)}header{padding:22px 20px}#question{font-size:19px}.option{padding:13px}aside{order:2}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+.view-tabs{max-width:1120px;margin:22px auto 0;padding:0 20px;display:flex;gap:10px}.view-tabs button[aria-pressed="true"]{background:#15614f;color:white;border-color:#15614f}
+.lookup{max-width:1120px;margin:24px auto;padding:0 20px}.lookup h2{margin:0 0 8px}.lookup-search{display:block;width:100%;padding:14px 16px;font:inherit;border:1px solid #b8ccbf;border-radius:10px;margin:10px 0}.lookup-card{margin:18px 0}.lookup-card h3{font-size:19px;line-height:1.6;margin:0 0 18px}.lookup-option{display:flex;gap:14px;padding:12px 14px;margin:8px 0;border:1px solid #e1e8e1;border-radius:10px}.lookup-option .letter{border-radius:50%;background:transparent;border:2px solid transparent;flex-shrink:0}.lookup-correct{background:#e8f7ed;border-color:#36835b;color:#195e36}.lookup-correct .letter{border-color:#195e36}.lookup-answer{font-weight:650;margin:16px 0 0;color:#195e36}.lookup-count{color:#58685e;font-size:14px}
 </style></head><body>
 <header><small>GÓC ÔN TẬP CỦA BẠN</small><h1>Chủ nghĩa xã hội khoa học</h1><p>100 câu · Chọn đáp án, biết kết quả ngay · Ôn lại câu sai</p></header>
-<main class="layout"><section>
+<nav class="view-tabs" aria-label="Chế độ học"><button id="tab-practice" aria-pressed="true" aria-controls="practice-view">Làm bài</button><button id="tab-lookup" aria-pressed="false" aria-controls="lookup-view">Tra cứu đáp án</button></nav>
+<section id="lookup-view" class="lookup" hidden><div class="card"><h2 tabindex="-1" id="lookup-title">Tra cứu câu hỏi và đáp án</h2><p>Đáp án theo ảnh bạn cung cấp được khoanh tròn và tô xanh. Mở tra cứu không làm thay đổi tiến độ làm bài.</p><label for="lookup-search">Tìm theo số câu hoặc nội dung</label><input id="lookup-search" class="lookup-search" type="search" placeholder="Ví dụ: 25 hoặc giai cấp công nhân" autocomplete="off"><p id="lookup-count" class="lookup-count" role="status" aria-live="polite"></p></div><div id="lookup-list"></div></section>
+<main id="practice-view" class="layout"><section>
 <section id="summary" class="card" tabindex="-1" hidden><h2>Kết quả lượt làm</h2><p id="summary-text"></p><button id="retry" class="primary"></button></section>
 <article class="card"><div class="topline"><strong id="round"></strong><span id="count"></span></div><progress id="progress" aria-label="Tiến độ lượt làm"></progress><div class="topline"><span id="question-number"></span><span id="position"></span></div><h2 id="question" tabindex="-1"></h2><div id="options" role="group" aria-labelledby="question"></div><div id="feedback" role="status" aria-live="polite" hidden><strong id="feedback-title"></strong><p id="feedback-answer"></p></div><div class="actions"><button id="previous">← Câu trước</button><button id="next" class="primary">Câu tiếp theo →</button></div></article></section>
 <aside><div class="card"><strong>Tiến độ lượt này</strong><div class="stats"><div><strong id="correct-count">0</strong>câu đúng</div><div><strong id="wrong-count">0</strong>câu sai</div></div><details open><summary>Danh sách câu hỏi</summary><nav id="nav" aria-label="Chọn câu hỏi"></nav></details><p class="note">Xanh: đúng · Đỏ: sai · Trắng: chưa làm.<br>Hoàn thành lượt để làm lại riêng các câu sai.</p><button id="restart">Làm lại toàn bộ 100 câu</button><p class="note" id="storage-note">Tiến độ tự lưu trên trình duyệt này.</p></div></aside></main>
@@ -1189,4 +1194,32 @@ $('next').onclick=()=>{
 $('retry').onclick=()=>{if(answeredCount(state)!==state.ids.length||!wrongIds(state,questions).length)return;state=retrySession(state,questions);save();render();$('question').focus();};
 $('restart').onclick=()=>{if(confirm('Bắt đầu lại toàn bộ 100 câu? Tiến độ lượt hiện tại sẽ được xóa.')){state=newSession(ids);save();render();$('question').focus();}};
 render();
+</script><script>
+function normalizeLookup(text){return String(text).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[đĐ]/g,'d').toLowerCase();}
+function lookupMatches(query){const term=normalizeLookup(query.trim());const num=term.match(/^(?:cau\s*)?(\d+)$/);return questions.filter(q=>!term||(num?q.id===Number(num[1]):normalizeLookup(q.question+' '+Object.values(q.options).join(' ')).includes(term)));}
+function renderLookup(){
+ const matches=lookupMatches($('lookup-search').value||'');
+ $('lookup-count').textContent='Hiển thị '+matches.length+' / '+questions.length+' câu.';
+ $('lookup-list').replaceChildren();
+ for(const q of matches){
+  const card=document.createElement('article');card.className='card lookup-card';
+  const title=document.createElement('h3');title.textContent='Câu '+q.id+'. '+q.question;card.append(title);
+  for(const [letter,value]of Object.entries(q.options)){
+   const row=document.createElement('div');row.className='lookup-option'+(letter===q.answer?' lookup-correct':'');
+   const badge=document.createElement('span');badge.className='letter';badge.textContent=letter;
+   const body=document.createElement('span');body.textContent=value;row.append(badge,body);card.append(row);
+  }
+  const answer=document.createElement('p');answer.className='lookup-answer';answer.textContent='Đáp án đã khoanh: '+q.answer+'. '+q.options[q.answer];card.append(answer);
+  $('lookup-list').append(card);
+ }
+ if(!matches.length){const empty=document.createElement('p');empty.textContent='Không tìm thấy câu phù hợp. Bạn thử số câu từ 1 đến 100 hoặc từ khóa khác nhé.';$('lookup-list').append(empty);}
+}
+function showStudyView(lookup){
+ $('practice-view').hidden=lookup;$('lookup-view').hidden=!lookup;
+ $('tab-practice').setAttribute('aria-pressed',String(!lookup));$('tab-lookup').setAttribute('aria-pressed',String(lookup));
+ if(lookup){renderLookup();$('lookup-title').focus();}
+}
+$('tab-practice').onclick=()=>showStudyView(false);
+$('tab-lookup').onclick=()=>showStudyView(true);
+$('lookup-search').oninput=renderLookup;
 </script></body></html>
